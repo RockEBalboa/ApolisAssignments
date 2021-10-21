@@ -1,0 +1,6 @@
+framework module Pods_NYTimesAPIList_NYTimesAPIListUITests {
+  umbrella header "Pods-NYTimesAPIList-NYTimesAPIListUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
