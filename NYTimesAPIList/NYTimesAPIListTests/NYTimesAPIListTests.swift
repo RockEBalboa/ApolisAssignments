@@ -11,25 +11,30 @@ import XCTest
 
 class NYTimesAPIListTests: XCTestCase {
     var list: ArticleVM?
+    var objArticle: Article?
     
     override func setUpWithError() throws {
         list = ArticleVM()
+        objArticle = Article(title: "abc", byline: "byline", published_date: "date", url: ".com", multimedia: [MultiMedia(url: "url")])
     }
     
     override func tearDownWithError() throws {
         list = nil
     }
     
+    func testAddArticle() {
+        list?.addArticle(article: objArticle ?? Article())
+        XCTAssertEqual(list?.getArticleCount(), 1)
+    }
+    
     func testGetArticle() {
-        list?.addArticle(article: Article(title: "woo"))
-        XCTAssertEqual(list?.getArticle(at: 0).title, "woo")
+        list?.addArticle(article: objArticle ?? Article())
+        XCTAssertEqual(list?.getArticle(at: 0).title, "abc")
     }
     
     func testPopulateArticles() throws {
         var articleCount: Int?
         list?.populateArticles(url: "https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=aDFfPYP6tsmCYHNdOPUcNqPCvus1O4Ed")
-//        articleCount = self.list?.getArticleCount() ?? -1
-
         let timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
             articleCount = self.list?.getArticleCount() ?? -1
             XCTAssertGreaterThan(articleCount!, 0)
@@ -37,7 +42,7 @@ class NYTimesAPIListTests: XCTestCase {
     }
     
     func testGetArticleCount() {
-        list?.addArticle(article: Article(title: "woo"))
+        list?.addArticle(article: objArticle ?? Article())
         XCTAssertEqual(list?.getArticleCount(), 1)
     }
     
