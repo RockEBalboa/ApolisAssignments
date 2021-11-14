@@ -9,6 +9,9 @@ import Foundation
 
 class AddVM {
     
+    /**
+        Function will save the garment to local storage
+     */
     func saveGarment(name: String) {
         let garment = Garment(context: Database.db.context)
         garment.name = name

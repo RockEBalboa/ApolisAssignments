@@ -11,6 +11,9 @@ class ListVM {
     var garmentList = [Garment]()
     let db = Database.db
     
+    /**
+        Function fetches the list of garments (in a sorted manner) from local storage.
+     **/
     func fetchGarmentList(sortType: Int) {
         var sort: NSSortDescriptor?
         switch sortType {
